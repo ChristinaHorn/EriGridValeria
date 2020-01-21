@@ -1,0 +1,13 @@
+**/.ipynb_checkpoints
+*.ipynb
+/.idea
+**/__pycache__/
+Latex/build/
+*.XLSX#
+*.xlsx#
+*.ods#
+**/Results
+**/Data
+*.csv
+
+
