@@ -1,3 +1,12 @@
+# global parameters
+################################################################################
+VBase = 400
+PBase = 1e4
+IBase = PBase/VBase
+resolution = 1e-3
+samplerate = trunc(Int, 1/resolution)
+################################################################################
+
 # define structs for measurement data and complex phasor representation
 ################################################################################
 mutable struct measurement
