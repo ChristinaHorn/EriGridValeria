@@ -7,6 +7,7 @@ The time series for solar fluctuating power is created with an R script. It basi
 * script: *create_time_series.R*
 * jump diffusion model: *RT-fJumpDiff.R*
 * output file: *solar_time_series.csv*
+* output plot: *solar_time_series.pdf*
 
 #### How to run the script
 
