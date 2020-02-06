@@ -3,6 +3,11 @@ using DelimitedFiles
 using Plots
 using FFTW
 
+################################################################################
+# USABLE FOR TESTCASE 3 & 4
+################################################################################
+
+
 # struct and function definitions
 ################################################################################
 include("Definitions.jl")
@@ -10,11 +15,11 @@ include("Definitions.jl")
 
 # read csv files for slack and load and transform to phasor representation
 ################################################################################
-path = "/home/kogler/Julia/tecnalia/Data_reduced/Testcase3/TC3.1.txt"
+path = "/home/kogler/Julia/tecnalia/Data_reduced/Testcase4/TC4.1.txt"
 file = collect(eachrow(readdlm(path, ',', Float64, header=false)))
 slack_meas = measurement(file[1:3]..., -(file[2].+file[3]), file[4:5]..., -(file[4].+file[5]))
 load_meas = measurement(file[[1;6:7]]..., -(file[6].+file[7]), file[8:9]..., -(file[8].+file[9]))
-fac = 1.1/sqrt(3.0)
+fac = 1.087/sqrt(3.0)
 inverter1_meas = measurement(file[1], fac*file[10:11]..., -fac*(file[10].+file[11]),
                                 file[12:13]..., -(file[12].+file[13]))
 inverter2_meas = measurement(file[1], fac*file[14:15]..., -fac*(file[14].+file[15]),

@@ -3,6 +3,11 @@ using DelimitedFiles
 using Plots
 using FFTW
 
+################################################################################
+# USABLE FOR TESTCASE 1
+################################################################################
+
+
 # struct and function definitions
 ################################################################################
 include("Definitions.jl")
@@ -10,7 +15,7 @@ include("Definitions.jl")
 
 # read csv files for slack and load and transform to phasor representation
 ################################################################################
-path = "/home/kogler/Julia/tecnalia/Data_reduced/Testcase1/TC1.5.txt"
+path = "/home/kogler/Julia/tecnalia/Data_reduced/Testcase1/TC1.1.txt"
 file = collect(eachrow(readdlm(path, ',', Float64, header=false)))
 slack_meas = measurement(file[1:7]...)
 load_meas = measurement(file[[1;8:10]]..., -file[5:7]...)
