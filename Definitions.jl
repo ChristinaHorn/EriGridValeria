@@ -1,10 +1,10 @@
 # global parameters
 ################################################################################
-VBase = 400
+VBase = 393.4#400
 PBase = 1e4
 IBase = PBase/VBase
 resolution = 1e-3
-samplerate = trunc(Int, 1/resolution)
+samplerate = round(Int, 1/resolution)
 ################################################################################
 
 # define structs for measurement data and complex phasor representation
@@ -74,7 +74,7 @@ end
 
 function toComplex(meas::measurement, phaseShift=0.)
     fAvg = getFreqAvg(Array{Float64}(meas.U1), samplerate)
-    win = trunc(Int, 1/(resolution*fAvg))
+    win = round(Int, 1/(resolution*fAvg))
     u_ab = ABTransform*transpose(hcat(meas.U1, meas.U2, meas.U3))
     u = (u_ab[1,:] .+ im*u_ab[2,:])/VBase.*exp.(im*phaseShift)
     uRot = u.*exp.(im*2*pi*fAvg*meas.t)
@@ -87,8 +87,9 @@ function toComplex(meas::measurement, phaseShift=0.)
     iRotAvg = averageWin(iRot, win)
     iAmp = abs.(iRotAvg)
     iPhi = getAngle(iRotAvg)
-    f = fAvg .+ getDerivative(uPhi, resolution)/(2.0*pi)
-    S = uRotAvg.*conj.(iRotAvg)
+    f = fAvg .- getDerivative(uPhi, resolution)/(2.0*pi)
+    #S = uRotAvg.*conj.(iRotAvg)
+    S = conj.(uRotAvg).*(iRotAvg)
     P = real.(S)
     Q = imag.(S)
     return phasor(meas.t, u, uRot, uAmp, uPhi, i, iRot, iAmp, iPhi, P, Q, f, fAvg)
